@@ -1,0 +1,28 @@
+connection = mysql.connector.connect(user='root', password='asd', host='127.0.0.1', database='SystemRoomsPiDb')
+
+if connection.is_connected():
+       db_Info = connection.get_server_info()
+       print("Connected to MySQL database... MySQL Server version on ",db_Info)
+
+cursor = connection.cursor()
+
+
+
+cursor.execute("SELECT * FROM Alerts")
+for row in cursor.fetchall():
+        print("alerts= ", row[1])
+
+
+add_employee = ("INSERT INTO Alerts (AlertId,AlertName,Alert_Code) VALUES ('NULL','Speed Sensor','5')")
+cursor.execute(add_employee)
+result = cursor.fetchone()
+
+
+
+connection.close()
+
+
+
+delete_employee = ("DELETE FROM Alerts WHERE Alert_Code = 5")
+cursor.execute(delete_employee)
+result = cursor.fetchone()
